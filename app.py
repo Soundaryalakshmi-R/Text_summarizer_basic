@@ -8,7 +8,7 @@ import os
 app = Flask(__name__,static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
  
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL",'')
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://neondb_owner:npg_0FwMV3fKvmuz@ep-dry-flower-a1l5zs73-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.secret_key = 'lakshmi'  
