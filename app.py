@@ -3,27 +3,33 @@ from flask_sqlalchemy import SQLAlchemy
 from models import db, Feedback
 from summarizer import summarize_text
 from flask_migrate import Migrate
+ #from dotenv import load_dotenv
 import os
-import pickle
 import nltk
+import spacy
 
-# Set NLTK data path
-nltk.data.path.append('/opt/render/nltk_data')
 # Download the punkt resource
-nltk.download('punkt', download_dir='/opt/render/nltk_data')
-with open("nlp_model.pkl", "rb") as file:
-    nlp = pickle.load(file)
+nltk.download('punkt')
+# Load SpaCy's language model
+nlp = spacy.load("en_core_web_sm")
+# Set NLTK data path
+# nltk.data.path.append('/opt/render/nltk_data')
+# # Download the punkt resource
+# nltk.download('punkt', download_dir='/opt/render/nltk_data')
+# with open("nlp_model.pkl", "rb") as file:
+#     nlp = pickle.load(file)
 
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://feedback_0gek_user:ZZx8fzM6xWE1kQDWmYA1Zll6g3OLMtAi@dpg-cua8cjtds78s739l8320-a.oregon-postgres.render.com/feedback_0gek"
-#"postgresql://neondb_owner:npg_0FwMV3fKvmuz@ep-dry-flower-a1l5zs73-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+ 
+# app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://neondb_owner:npg_0FwMV3fKvmuz@ep-dry-flower-a1l5zs73-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 app.secret_key = 'lakshmi'  
 
 db.init_app(app)
 migrate = Migrate(app, db)
-
 # Create the database tables
 with app.app_context():
     db.create_all()
@@ -56,6 +62,3 @@ def feedback():
     db.session.commit()
 
     return redirect("/")
-
-if __name__ == '__main__':
-    app.run(debug=True)
