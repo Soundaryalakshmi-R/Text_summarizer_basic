@@ -15,6 +15,12 @@ try:
 except LookupError:
     nltk.download('punkt', download_dir='/opt/render/nltk_data')
 
+# Ensure the 'punkt' resource is downloaded
+try:
+    nltk.data.find('tokenizers/punkt_tab')
+except LookupError:
+    nltk.download('punkt_tab', download_dir='/opt/render/nltk_data')
+
 # # Download the punkt resource
 # nltk.download('punkt')
 # Load SpaCy's language model
