@@ -8,16 +8,18 @@ import os
 import nltk
 import spacy
 
-# Download the punkt resource
-nltk.download('punkt')
+# Ensure the NLTK 'punkt' resource is downloaded
+nltk.data.path.append('/opt/render/nltk_data')
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', download_dir='/opt/render/nltk_data')
+
+# # Download the punkt resource
+# nltk.download('punkt')
 # Load SpaCy's language model
 nlp = spacy.load("en_core_web_sm")
-# Set NLTK data path
-# nltk.data.path.append('/opt/render/nltk_data')
-# # Download the punkt resource
-# nltk.download('punkt', download_dir='/opt/render/nltk_data')
-# with open("nlp_model.pkl", "rb") as file:
-#     nlp = pickle.load(file)
+
 
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
