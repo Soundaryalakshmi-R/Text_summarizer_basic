@@ -5,6 +5,14 @@ from summarizer import summarize_text
 from flask_migrate import Migrate
  #from dotenv import load_dotenv
 import os
+import nltk
+import spacy
+
+# Download the punkt resource
+nltk.download('punkt')
+# Load SpaCy's language model
+nlp = spacy.load("en_core_web_sm")
+
 app = Flask(__name__,static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
  
