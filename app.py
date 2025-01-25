@@ -3,26 +3,22 @@ from flask_sqlalchemy import SQLAlchemy
 from models import db, Feedback
 from summarizer import summarize_text
 from flask_migrate import Migrate
- #from dotenv import load_dotenv
 import os
-import nltk
-import spacy
+import pickle
 
-# Download the punkt resource
-nltk.download('punkt')
-# Load SpaCy's language model
-nlp = spacy.load("en_core_web_sm")
+# Load the pickled model
+with open("nlp_model.pkl", "rb") as file:
+    nlp = pickle.load(file)
 
-app = Flask(__name__,static_url_path='/static')
+app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
- 
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://neondb_owner:npg_0FwMV3fKvmuz@ep-dry-flower-a1l5zs73-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 app.secret_key = 'lakshmi'  
 
 db.init_app(app)
 migrate = Migrate(app, db)
+
 # Create the database tables
 with app.app_context():
     db.create_all()
@@ -55,3 +51,6 @@ def feedback():
     db.session.commit()
 
     return redirect("/")
+
+if __name__ == '__main__':
+    app.run(debug=True)

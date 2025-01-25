@@ -1,10 +1,11 @@
-import spacy
+import pickle
+from nltk.tokenize import sent_tokenize
 from heapq import nlargest
 from collections import Counter
-from nltk.tokenize import sent_tokenize
 
-# Load SpaCy's language model
-nlp = spacy.load("en_core_web_sm")
+# Load the pickled model
+with open("nlp_model.pkl", "rb") as file:
+    nlp = pickle.load(file)
 
 def summarize_text(text, num_sentences=3):
     # Tokenize the text into sentences
