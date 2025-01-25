@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Summary</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Text Summary</h1>
+      <h2>Input Text:</h2>
+      <p>{{ input_text }}</p>
+      <h2>Summarized Text:</h2>
+      <p>{{ summarized_text }}</p>
+      <form action="/feedback" method="POST">
+        <input type="hidden" name="input_text" value="{{ input_text }}" />
+        <input
+          type="hidden"
+          name="summarized_text"
+          value="{{ summarized_text }}"
+        />
+
+        <label for="name">Your Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          placeholder="Enter your name"
+          required
+        />
+
+        <label for="rating">Rating:</label>
+        <select id="rating" name="rating" required>
+          <option value="" disabled selected>Select rating</option>
+          <option value="1">1 - Poor</option>
+          <option value="2">2 - Fair</option>
+          <option value="3">3 - Good</option>
+          <option value="4">4 - Very Good</option>
+          <option value="5">5 - Excellent</option>
+        </select>
+
+        <label for="feedback">Feedback:</label>
+        <textarea
+          id="feedback"
+          name="feedback"
+          placeholder="Enter your feedback here..."
+          required
+        ></textarea>
+
+        <button type="submit">Submit Feedback</button>
+      </form>
+    </div>
+  </body>
+</html>
