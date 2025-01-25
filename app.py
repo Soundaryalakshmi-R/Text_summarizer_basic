@@ -12,7 +12,8 @@ with open("nlp_model.pkl", "rb") as file:
 
 app = Flask(__name__, static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://neondb_owner:npg_0FwMV3fKvmuz@ep-dry-flower-a1l5zs73-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://feedback_0gek_user:ZZx8fzM6xWE1kQDWmYA1Zll6g3OLMtAi@dpg-cua8cjtds78s739l8320-a.oregon-postgres.render.com/feedback_0gek"
+#"postgresql://neondb_owner:npg_0FwMV3fKvmuz@ep-dry-flower-a1l5zs73-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'lakshmi'  
 
