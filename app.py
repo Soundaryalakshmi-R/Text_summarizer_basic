@@ -5,8 +5,12 @@ from summarizer import summarize_text
 from flask_migrate import Migrate
 import os
 import pickle
+import nltk
 
-# Load the pickled model
+# Set NLTK data path
+nltk.data.path.append('/opt/render/nltk_data')
+# Download the punkt resource
+nltk.download('punkt', download_dir='/opt/render/nltk_data')
 with open("nlp_model.pkl", "rb") as file:
     nlp = pickle.load(file)
 
